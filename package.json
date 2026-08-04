@@ -1,0 +1,28 @@
+{
+  "name": "tostao",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c green,cyan \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm run start:dev -w api",
+    "dev:web": "npm run dev -w web",
+    "db:up": "docker compose up -d db",
+    "db:migrate": "npm run migration:run -w api",
+    "db:seed": "npm run seed -w api",
+    "build": "npm run build -w api && npm run build -w web",
+    "test": "npm test -w api && npm test -w web",
+    "test:e2e": "npm run test:e2e -w api && npm run test:e2e -w web",
+    "lint": "npm run lint -w api && npm run lint -w web",
+    "typecheck": "npm run typecheck -w api && npm run typecheck -w web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "storybook": "npm run storybook -w web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.5",
+    "prettier": "^3.9.10"
+  }
+}

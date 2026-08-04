@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+*.tsbuildinfo
+.env
+*.local
+.DS_Store
+web/storybook-static
+web/test-results
+web/playwright-report
+extratos/
