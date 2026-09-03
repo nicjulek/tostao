@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-income: var(--income);
+  --color-expense: var(--expense);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-focus: var(--focus);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --text-display: 2.75rem;
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.03em;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+:root {
+  --bg: #f3f4f1;
+  --surface: #ffffff;
+  --surface-2: #eceee9;
+  --line: #dde1da;
+  --ink: #15201c;
+  --ink-2: #4a5852;
+  --ink-3: #6f7c76;
+  --brand: #1f5c4a;
+  --brand-ink: #f2f7f3;
+  --brand-soft: #dbe9e1;
+  --income: #2b6fb5;
+  --expense: #c2691a;
+  --danger: #b4233c;
+  --danger-soft: #f8e3e6;
+  --warning: #8a5a00;
+  --warning-soft: #fbefd5;
+  --focus: #2b6fb5;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0e1412;
+  --surface: #141c1a;
+  --surface-2: #1b2522;
+  --line: #2a3632;
+  --ink: #e7eeea;
+  --ink-2: #a8b6af;
+  --ink-3: #82918a;
+  --brand: #6cc3a0;
+  --brand-ink: #0b1a14;
+  --brand-soft: #1d3a2f;
+  --income: #4a8fd4;
+  --expense: #cf7f2e;
+  --danger: #f08a99;
+  --danger-soft: #3a1f25;
+  --warning: #e9b85a;
+  --warning-soft: #3a2f17;
+  --focus: #7db4ec;
+  color-scheme: dark;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--brand-soft);
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
