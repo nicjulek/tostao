@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: tostao
+      POSTGRES_PASSWORD: tostao
+      POSTGRES_DB: tostao
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U tostao']
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    profiles: ['app']
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://tostao:tostao@db:5432/tostao
+      JWT_SECRET: troque-este-segredo-em-producao
+      WEB_ORIGIN: http://localhost:3000
+      SMTP_URL: ${SMTP_URL:-}
+      MAIL_FROM: ${MAIL_FROM:-Tostão <avisos@tostao.local>}
+    ports:
+      - '3000:3000'
+
+volumes:
+  pgdata:
